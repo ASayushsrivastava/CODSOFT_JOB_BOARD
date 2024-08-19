@@ -27,7 +27,13 @@ const jobRoute = require('./Routes/jobsRoutes');
         extended: true
     }));
     app.use(cookieParser());
-    app.use(cors());
+    app.use(cors(
+        {
+            origin:["https://deploy-mern-1whq.vercel.app"],
+            methods: ["POST","GET"],
+            credentials: true
+        }
+    ));
     // adding security headers
     app.use(
         helmet.contentSecurityPolicy({
