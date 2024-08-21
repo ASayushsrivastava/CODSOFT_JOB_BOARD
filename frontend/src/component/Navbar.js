@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -81,7 +80,7 @@ const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        Alliance Helper
+                        JOB PORTAL
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

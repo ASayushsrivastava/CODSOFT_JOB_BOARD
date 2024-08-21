@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Box, Button, IconButton, Paper, Typography } from '@mui/material'
+import { Box, Button, Paper, Typography } from '@mui/material'
 import { DataGrid, gridClasses, GridToolbar } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
@@ -69,19 +69,17 @@ const DashUsers = () => {
         }
     ];
 
-    
-
     return (
         <>
             <Box >
 
-                <Typography variant="h3" sx={{ color: "#2E7D32", pb: 3 }}>
+                <Typography variant="h4" sx={{ color: "white", pb: 3 }}>
                     All users
                 </Typography>
                 <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
                     <Button variant='contained' color="success" startIcon={<AddIcon />}> Create user</Button>
                 </Box>
-                <Paper sx={{ bgcolor: "#2E7D32" }} >
+                <Paper sx={{ bgcolor: "secondary.midNightBlue" }} >
 
                     <Box sx={{ height: 400, width: '100%' }}>
                         <DataGrid
@@ -90,18 +88,14 @@ const DashUsers = () => {
                                 '& .MuiTablePagination-displayedRows': {
                                     color: 'white',
                                 },
-                                '& .MuiDataGrid-columnHeader': {
-                                    color: 'black', 
-                                },
                                 color: 'white',
                                 [`& .${gridClasses.row}`]: {
                                     bgcolor: (theme) =>
                                         // theme.palette.mode === 'light' ? grey[200] : grey[900],
-                                        "#A5D6A7",
-                                    color:'black'
+                                        theme.palette.secondary.main
                                 },
                                 button: {
-                                    color: 'white'
+                                    color: '#ffffff'
                                 }
 
                             }}

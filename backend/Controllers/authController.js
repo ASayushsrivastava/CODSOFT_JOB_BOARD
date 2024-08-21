@@ -1,5 +1,6 @@
-const User = require('../Models/userModel.js');
-const ErrorResponse = require('../Utils/errorResponse.js');
+
+const User = require('../models/userModel');
+const ErrorResponse = require('../utils/errorResponse');
 
 
 exports.signup = async (req, res, next) => {
@@ -9,6 +10,7 @@ exports.signup = async (req, res, next) => {
         return next(new ErrorResponse("E-mail already registred", 400));
     }
     try {
+        req.body.role = 0; // this is to prevent anyone creating an admin user.
         const user = await User.create(req.body);
         res.status(201).json({
             success: true,
@@ -55,7 +57,10 @@ const sendTokenResponse = async (user, codeStatus, res) => {
     res
         .status(codeStatus)
         .cookie('token', token, { maxAge: 60 * 60 * 1000, httpOnly: true })
-        .json({ success: true, role: user.role })
+        .json({
+            success: true,
+            role: user.role
+        })
 }
 
 
@@ -68,6 +73,7 @@ exports.logout = (req, res, next) => {
     })
 }
 
+
 // user profile
 exports.userProfile = async (req, res, next) => {
 
@@ -78,3 +84,7 @@ exports.userProfile = async (req, res, next) => {
         user
     })
 }
+
+
+
+

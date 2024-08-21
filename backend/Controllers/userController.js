@@ -1,5 +1,5 @@
-const User = require('../Models/userModel');
-const ErrorResponse = require('../Utils/errorResponse');
+const User = require('../models/userModel');
+const ErrorResponse = require('../utils/errorResponse');
 
 //load all users
 exports.allUsers = async (req, res, next) => {
@@ -104,3 +104,11 @@ exports.createUserJobsHistory = async (req, res, next) => {
         return next(error);
     }
 }
+
+
+
+
+
+
+
+

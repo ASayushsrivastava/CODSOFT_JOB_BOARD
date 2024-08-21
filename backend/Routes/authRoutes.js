@@ -1,18 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { signup, signin, logout, userProfile } = require('../Controllers/authController');
-const { isAuthenticated } = require('../Middleware/auth');
+const { signup, signin, logout, userProfile } = require('../controllers/authController');
+const { isAuthenticated } = require('../middleware/auth');
 
-// signup
+
+//auth routes
+// /api/signup
 router.post('/signup', signup);
-
-// signin
+// /api/signin
 router.post('/signin', signin);
-
-// logout
+// /api/logout
 router.get('/logout', logout);
-
-// me
+// /api/me
 router.get('/me', isAuthenticated, userProfile);
 
 module.exports = router;

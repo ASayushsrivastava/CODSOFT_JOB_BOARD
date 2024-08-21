@@ -4,7 +4,7 @@ import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from 'react-redux';
-import { jobLoadAction } from '../../redux/actions/jobAction';
+import { deleteSingleJobAction, jobLoadAction } from '../../redux/actions/jobAction';
 
 
 
@@ -17,15 +17,19 @@ const DashJobs = () => {
         dispatch(jobLoadAction())
     }, []);
 
-
+    const { success: deleteSuccess } = useSelector(state => state.deleteJob);
     const { jobs, loading } = useSelector(state => state.loadJobs);
     let data = [];
     data = (jobs !== undefined && jobs.length > 0) ? jobs : []
 
-
-    //delete job by Id
+    // delete a job by id
     const deleteJobById = (e, id) => {
-        console.log(id)
+        if (window.confirm(`You really want to delete product ID: "${id}" ?`)) {
+            dispatch(deleteSingleJobAction(id));
+            if (deleteSuccess && deleteSuccess === true) {
+                dispatch(jobLoadAction())
+            }
+        }
     }
 
     const columns = [
@@ -45,13 +49,13 @@ const DashJobs = () => {
             field: 'jobType',
             headerName: 'Category',
             width: 150,
-            valueGetter: (data) => data.row.jobType.jobTypeName
+            valueGetter: (data) => data.row?.jobType?.jobTypeName
         },
         {
             field: 'user',
             headerName: 'User',
             width: 150,
-            valueGetter: (data) => data.row.user.firstName
+            valueGetter: (data) => data.row?.user?.firstName
         },
         {
             field: 'available',
@@ -87,16 +91,17 @@ const DashJobs = () => {
     ];
 
 
+
     return (
         <Box >
 
-            <Typography variant="h4" sx={{ color: "#2E7D32", pb: 3 }}>
+            <Typography variant="h4" sx={{ color: "white", pb: 3 }}>
                 Jobs list
             </Typography>
             <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
                 <Button variant='contained' color="success" startIcon={<AddIcon />}> <Link style={{ color: "white", textDecoration: "none" }} to="/admin/job/create">Create Job</Link></Button>
             </Box>
-            <Paper sx={{ bgcolor: "#2E7D32" }} >
+            <Paper sx={{ bgcolor: "secondary.midNightBlue" }} >
 
                 <Box sx={{ height: 400, width: '100%' }}>
                     <DataGrid
@@ -106,18 +111,14 @@ const DashJobs = () => {
                             '& .MuiTablePagination-displayedRows': {
                                 color: 'white',
                             },
-                            '& .MuiDataGrid-columnHeader': {
-                                color: 'black', 
-                            },
                             color: 'white',
                             [`& .${gridClasses.row}`]: {
                                 bgcolor: (theme) =>
                                     // theme.palette.mode === 'light' ? grey[200] : grey[900],
-                                    "#A5D6A7",
-                                    color:'black'
+                                    theme.palette.secondary.main
                             },
                             button: {
-                                color: 'white'
+                                color: '#ffffff'
                             }
 
                         }}

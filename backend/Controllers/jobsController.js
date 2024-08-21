@@ -1,6 +1,6 @@
-const Job = require('../Models/jobModel');
-const JobType = require('../Models/jobTypeModel');
-const ErrorResponse = require('../Utils/errorResponse');
+const Job = require('../models/jobModel');
+const JobType = require('../models/jobTypeModel');
+const ErrorResponse = require('../utils/errorResponse');
 
 //create job
 exports.createJob = async (req, res, next) => {
@@ -26,7 +26,7 @@ exports.createJob = async (req, res, next) => {
 //single job
 exports.singleJob = async (req, res, next) => {
     try {
-        const job = await Job.findById(req.params.id);
+        const job = await Job.findById(req.params.id).populate('jobType', 'jobTypeName');
         res.status(200).json({
             success: true,
             job
@@ -63,6 +63,7 @@ exports.deleteJob = async (req, res, next) => {
         next(error);
     }
 }
+
 
 //update job by id.
 exports.showJobs = async (req, res, next) => {
@@ -105,7 +106,7 @@ exports.showJobs = async (req, res, next) => {
     const count = await Job.find({ ...keyword, jobType: categ, location: locationFilter }).countDocuments();
 
     try {
-        const jobs = await Job.find({ ...keyword, jobType: categ, location: locationFilter }).sort({ createdAt: -1 }).populate('jobType', 'jobTypeName').populate('user', 'firstName').skip(pageSize * (page - 1)).limit(pageSize) 
+        const jobs = await Job.find({ ...keyword, jobType: categ, location: locationFilter }).sort({ createdAt: -1 }).populate('jobType', 'jobTypeName').populate('user', 'firstName').skip(pageSize * (page - 1)).limit(pageSize)
         res.status(200).json({
             success: true,
             jobs,
@@ -119,3 +120,8 @@ exports.showJobs = async (req, res, next) => {
         next(error);
     }
 }
+
+
+
+
+

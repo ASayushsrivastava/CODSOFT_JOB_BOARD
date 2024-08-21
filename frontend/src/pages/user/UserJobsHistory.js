@@ -4,13 +4,15 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import CardElement from '../../component/CardElement'
 
+
 const UserJobsHistory = () => {
     const { user } = useSelector(state => state.userProfile);
-    
+
+
     return (
         <>
             <Box>
-                <Typography variant="h2" sx={{ color: "#2E7D32" }}> Jobs History</Typography>
+                <Typography variant="h4" sx={{ color: "#fafafa" }}> Jobs History</Typography>
                 <Box>
                     {
                         user && user.jobsHistory.map((history, i) => (

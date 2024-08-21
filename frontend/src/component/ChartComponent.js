@@ -1,3 +1,4 @@
+
 import { Card, CardContent, useTheme } from '@mui/material'
 
 
@@ -5,7 +6,7 @@ const ChartComponent = ({ children }) => {
     const { palette } = useTheme();
     return (
         <>
-            <Card sx={{ bgcolor: palette.primary.main, width: "100%" }}>
+            <Card sx={{ bgcolor: palette.secondary.midNightBlue, width: "100%" }}>
                 <CardContent>
                     {children}
                 </CardContent>
