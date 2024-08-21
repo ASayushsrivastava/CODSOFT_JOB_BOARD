@@ -83,9 +83,6 @@ app.use(errorHandler);
 const port = process.env.PORT || 9000
 
 app.listen(port, () => {
-<<<<<<< HEAD
   console.log(`Server running on port ${port}`);
-=======
     console.log(`Server running on port ${port}`);
->>>>>>> c8ab67a4b099083b55e8f1c5a9ef026e708fdc47
 });
